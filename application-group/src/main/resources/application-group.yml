@@ -20,8 +20,18 @@ apps:
   - name: tasklauncher-local
     type: sink
     uri:  task-launcher-local-sink-kafka
+  - name: timely-events
+    type: standalone
+    uri:  timely-events
 
-# The 'stream' section  translates directly into 'dataflow:>stream create ...'
+# The 'standalone' section translates directly into 'dataflow:>standalone create ...'
+# See https://blog.switchbit.io/introducing-standalone-applications-to-spring-cloud-data-flow
+# for more on the standalone application type
+standalone:
+  - name: timely-events
+    dsl: timely-events --server.port=8080
+
+# The 'stream' section translates directly into 'dataflow:>stream create ...'
 # Each stream listed below will be created and deployed.
 # See the 'deploymentProperties' section under the 'spring-cloud-dataflow-maven-plugin'
 # configuration section in the 'pom.xml.'

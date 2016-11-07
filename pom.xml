@@ -16,9 +16,11 @@
     </description>
 
 	<modules>
+		<module>config-server</module>
 		<module>timezone-converter</module>
 		<module>timezone-processor-kafka</module>
 		<module>timely-task</module>
+		<module>timely-events</module>
 		<module>application-group</module>
 	</modules>
 
@@ -39,6 +41,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
 				<version>1.4.2.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Camden.SR2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

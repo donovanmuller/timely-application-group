@@ -70,9 +70,15 @@ public class TimezoneJobConfiguration {
     @StepScope
     public ItemProcessor<TimelyTime, TimelyTime> timezoneProcessor(TimezoneConverter timezoneConverter,
             @Value("#{jobParameters[timezone]}") String timezone) {
-        return timelyTime -> timelyTime.converted(
-                timezoneConverter.convert(timelyTime.getOriginalTime()),
-                timezone);
+        return new ItemProcessor<TimelyTime, TimelyTime>() {
+
+            @Override
+            public TimelyTime process(final TimelyTime timelyTime) throws Exception {
+                return timelyTime.converted(
+                        timezoneConverter.convert(timelyTime.getOriginalTime()),
+                        timezone);
+            }
+        };
     }
 
     @Bean
