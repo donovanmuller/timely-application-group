@@ -5,6 +5,9 @@ apps:
   - name: time-source
     type: source
     uri:  time-source-kafka
+  - name: timezone-processor
+    type: processor
+    uri:  timezone-processor-kafka
   - name: log-sink
     type: sink
     uri:  log-sink-kafka
@@ -16,4 +19,4 @@ apps:
 # See http://docs.spring.io/spring-cloud-dataflow/docs/current/reference/html/spring-cloud-dataflow-create-stream.html
 stream:
   - name: timely-stream
-    dsl: time-source | log-sink
+    dsl: time-source | timezone-processor --timezone=Africa/Johannesburg | log-sink

@@ -20,7 +20,8 @@ The following branches are available:
 
 | Branch | Description |
 | --- | --- |
-| master (*current*) | The most basic stream definition. `time-source | log-sink` |
+| [master](https://github.com/donovanmuller/timely-application-group/tree/master) | The most basic stream definition. `time-source | log-sink` |
+| timezone-processor (*current*) | timezone-processor added to stream. `time-source | timezone-processor ... | log-sink` |
 
 ## Deploying
 
