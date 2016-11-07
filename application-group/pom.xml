@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>timely-application-group-parent</artifactId>
+        <groupId>io.switchbit</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../</relativePath>
+    </parent>
+
+    <artifactId>application-group</artifactId>
+
+    <!-- The ${project.name} will be used as the application group name when imported -->
+    <name>timely-application-group</name>
+    <description>
+        This project contains the Application Group descriptor file which defines the
+        apps, streams, tasks and standalone applications that are included in this Application Group.
+    </description>
+
+    <dependencies>
+        <!--  Explicitly defining the applications as dependencies allows us to reference the apps
+        using only their 'artifactId' as the 'uri' property in 'application-group.yml'. It also
+        ensures that the artifacts are resolvable.
+        -->
+        <dependency>
+            <groupId>org.springframework.cloud.stream.app</groupId>
+            <artifactId>time-source-kafka</artifactId>
+            <version>1.0.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud.stream.app</groupId>
+            <artifactId>log-sink-kafka</artifactId>
+            <version>1.0.4.RELEASE</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.switchbit</groupId>
+                <artifactId>spring-cloud-dataflow-maven-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                    <!-- These deployment properties will be passed to the relevant streams on deployment -->
+                    <deploymentProperties>
+                    </deploymentProperties>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- This goal parses the 'application-group.yml' descriptor file and
+                            builds the app resource URI's if 'artifactId' are referenced as well as basic
+                            validation of the structure of the descriptor file.
+                            -->
+                            <goal>application-group-processor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

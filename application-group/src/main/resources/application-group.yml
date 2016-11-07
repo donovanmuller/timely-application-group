@@ -1,0 +1,19 @@
+# The 'apps' section translates directly into 'dataflow:>app import --uri ...'
+# Each app listed will be imported as part of this application group.
+# See http://docs.spring.io/spring-cloud-dataflow/docs/current/reference/html/spring-cloud-dataflow-register-apps.html
+apps:
+  - name: time-source
+    type: source
+    uri:  time-source-kafka
+  - name: log-sink
+    type: sink
+    uri:  log-sink-kafka
+
+# The 'stream' section  translates directly into 'dataflow:>stream create ...'
+# Each stream listed below will be created and deployed.
+# See the 'deploymentProperties' section under the 'spring-cloud-dataflow-maven-plugin'
+# configuration section in the 'pom.xml.'
+# See http://docs.spring.io/spring-cloud-dataflow/docs/current/reference/html/spring-cloud-dataflow-create-stream.html
+stream:
+  - name: timely-stream
+    dsl: time-source | log-sink
