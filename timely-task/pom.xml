@@ -11,30 +11,43 @@
         <relativePath>../</relativePath>
     </parent>
 
-    <artifactId>timezone-processor-kafka</artifactId>
+    <artifactId>timely-task</artifactId>
 
     <description>
-        A Spring Cloud Stream processor application that converts an incoming time String
-        to the specified timezone. The timezone to convert to is specified as a configuration property.
-        This application is in context of a blog post introducing a application group feature to Spring Cloud Data Flow.
-        See https://blog.switchbit.io/a-take-on-application-groups-with-spring-cloud-data-flow
+        This Spring Batch based Spring Cloud Task application reads a specified input file, converts each line
+        (which is a representation of a time) to a configured timezone and then writes that converted time value
+        to a specified output file.
     </description>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-stream-kafka</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-task</artifactId>
+            <version>1.1.0.RC1</version>
+        </dependency>
+
+        <!-- Spring Batch -->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-batch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.switchbit</groupId>
             <artifactId>timezone-converter</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
         <!-- Test -->
@@ -44,19 +57,13 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-stream-test-support</artifactId>
+            <groupId>org.springframework.batch</groupId>
+            <artifactId>spring-batch-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -71,4 +78,15 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>

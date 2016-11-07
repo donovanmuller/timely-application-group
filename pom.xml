@@ -16,7 +16,9 @@
     </description>
 
 	<modules>
+		<module>timezone-converter</module>
 		<module>timezone-processor-kafka</module>
+		<module>timely-task</module>
 		<module>application-group</module>
 	</modules>
 
@@ -39,6 +41,11 @@
 				<version>1.4.2.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.16.10</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

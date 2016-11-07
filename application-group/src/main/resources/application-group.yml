@@ -14,6 +14,12 @@ apps:
   - name: file-sink
     type: sink
     uri:  file-sink-kafka
+  - name: trigger-task
+    type: source
+    uri:  triggertask-source-kafka
+  - name: tasklauncher-local
+    type: sink
+    uri:  task-launcher-local-sink-kafka
 
 # The 'stream' section  translates directly into 'dataflow:>stream create ...'
 # Each stream listed below will be created and deployed.
@@ -25,3 +31,6 @@ stream:
     dsl: time-source | timezone-processor --timezone=Africa/Johannesburg | log-sink
   - name: timely-file-tap
     dsl: :timely-stream.timezone-processor > file-sink --file.directory=/tmp --file.mode=APPEND --file.name=times
+  - name: timely-task
+    dsl: trigger-task --fixed-delay=60 --uri=maven://io.switchbit:timely-task:1.0-SNAPSHOT --command-line-args="inputFile=/tmp/times timezone=Africa/Johannesburg outputFile=/tmp/times-converted" | tasklauncher-local
+
