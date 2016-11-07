@@ -11,6 +11,9 @@ apps:
   - name: log-sink
     type: sink
     uri:  log-sink-kafka
+  - name: file-sink
+    type: sink
+    uri:  file-sink-kafka
 
 # The 'stream' section  translates directly into 'dataflow:>stream create ...'
 # Each stream listed below will be created and deployed.
@@ -20,3 +23,5 @@ apps:
 stream:
   - name: timely-stream
     dsl: time-source | timezone-processor --timezone=Africa/Johannesburg | log-sink
+  - name: timely-file-tap
+    dsl: :timely-stream.timezone-processor > file-sink --file.directory=/tmp --file.mode=APPEND --file.name=times

@@ -40,6 +40,11 @@
             <artifactId>log-sink-kafka</artifactId>
             <version>1.0.4.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud.stream.app</groupId>
+            <artifactId>file-sink-kafka</artifactId>
+            <version>1.0.4.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

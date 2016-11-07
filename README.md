@@ -21,7 +21,8 @@ The following branches are available:
 | Branch | Description |
 | --- | --- |
 | [master](https://github.com/donovanmuller/timely-application-group/tree/master) | The most basic stream definition. `time-source | log-sink` |
-| timezone-processor (*current*) | timezone-processor added to stream. `time-source | timezone-processor ... | log-sink` |
+| [timezone-processor](https://github.com/donovanmuller/timely-application-group/tree/timezone-processor) | timezone-processor added to stream. `time-source | timezone-processor ... | log-sink` |
+| timely-file-tap (*current*) | timely-file-tap added. `:timely-stream.timezone-processor > file-sink ...` |
 
 ## Deploying
 
